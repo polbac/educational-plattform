@@ -1,31 +1,54 @@
 import 'babel-polyfill';
 import React, { Component } from 'react';
-import { Create, TextInput, SimpleForm, DateInput, SelectInput, BooleanInput } from 'admin-on-rest';
+import { Create, AutocompleteInput, TextInput, SimpleForm, DateInput, SelectInput, BooleanInput, TabbedForm, FormTab } from 'admin-on-rest';
+
+const required = value => value ? undefined : 'Required';
 
 export const AlumnosCrear = (props) => (
     <Create {...props}>
-        <SimpleForm>
-            <TextInput source='nombre' label='Nombre' />        
-            <TextInput source='apellido' label='Apellido' />        
-            <TextInput source='dni' label='DNI' />        
-            <TextInput source='titulo' label='Titulo' />        
-            <DateInput source='anio_egreso' label='Año Ingreso' />        
-            <TextInput source='telefono' label='Telefono' />        
-            <TextInput source='domicilio' label='Domicilio' />        
-            <TextInput source='localidad' label='Localidad' />        
-            <TextInput source='provincia' label='Provincia' />        
-            <TextInput source='lugar_nacimiento' label='Lugar de Nacimiento' />        
-            <TextInput source='lugar_residencia' label='Lugar de Residencia' />        
-            <TextInput source='email' label='E-mail' type="email" />        
-            <SelectInput source="sexo" label="Sexo" choices={[
-                { id: 'femenini', name: 'Femenino' },
-                { id: 'masculino', name: 'Masculino' },
-                { id: 'otro', name: 'Otro' },
-            ]} />
-            <TextInput source='anio_inscripcion' label='Año Inscripción' />        
-            <DateInput source='fecha_nacimiento' label='Fecha de Nacimiento' />        
-            <BooleanInput source="carrera_aprovada" label="Carrera Aprovada" />
-
-        </SimpleForm>
+        <TabbedForm>
+            <FormTab label="Personales">
+                <TextInput source='name' label='Nombre' validate={required} />        
+                <TextInput source='lastname' label='Apellido' validate={required} />        
+                <TextInput source='document' label='DNI' validate={required} />        
+                <TextInput source='degree' label='Titulo' validate={required} />        
+                <TextInput source='phone' label='Telefono' validate={required} />        
+                
+                
+                
+                <TextInput source='email' label='E-mail' type="email" validate={required} />        
+                <SelectInput source="gender" label="Sexo"  choices={[
+                        { id: 'masculino', name: 'Masculino' },
+                        { id: 'femenino', name: 'Femenino' },
+                ]} validate={required} />        
+        </FormTab>
+        <FormTab label="Domicilio">
+            <TextInput source='address' label='Domicilio' validate={required} />        
+            <TextInput source='locality' label='Localidad' validate={required} />        
+            <AutocompleteInput 
+                source='province' 
+                label='Provincia'
+                optionText="value"
+                choices={[
+                    { id: 1, value: 'Buenos Aires' }
+                ]}
+            validate={required} />        
+            <TextInput source='city' label='Ciudad' validate={required} />        
+            <TextInput source='placer_birh' label='Lugar de Nacimiento' validate={required} />        
+            <TextInput source='place_residence' label='Lugar de Residencia' validate={required} />        
+        </FormTab>
+        <FormTab label="Alumno">
+            <DateInput source='entry' label='Año Inscripción' validate={required} />        
+            <DateInput source='egress' label='Fecha de Egreso' validate={required} />        
+            <SelectInput 
+                source="status" 
+                label="Carrera Aprovada" 
+                choices={[
+                    { id: 'alumno_regular', name: 'Alumno Regular' },
+                    { id: 'egresado', name: 'Egresado' },
+                ]}
+            validate={required} />        
+        </FormTab>
+        </TabbedForm>
     </Create>
 );

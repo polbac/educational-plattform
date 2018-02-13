@@ -12,12 +12,12 @@ const { style } = config;
 
   export default {
       spacing: spacing,
-      fontFamily: 'helvetica, arial, sans-serif',
+      fontFamily: '"Rubik", helvetica, arial, sans-serif',
       palette: {
         primary1Color: style.primary1Color,
         primary2Color: style.primary2Color,
         primary3Color: style.primary3Color,
-        accent1Color: pinkA200,
+        accent1Color: style.primary1Color,
         accent2Color: grey100,
         accent3Color: grey500,
         textColor: darkBlack,
@@ -25,7 +25,7 @@ const { style } = config;
         canvasColor: style.canvasColor,
         borderColor: grey300,
         disabledColor: fade(darkBlack, 0.3),
-        pickerHeaderColor: cyan500,
+        pickerHeaderColor: style.primary1Color,
         clockCircleColor: fade(darkBlack, 0.07),
         shadowColor: fullBlack,
       },
